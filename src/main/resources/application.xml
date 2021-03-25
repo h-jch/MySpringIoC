@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <bean id="helloService" class="com.hjc.test.HelloServiceImpl" scope="prototype">
+        <property name="msg" value="Hello, world!"></property>
+    </bean>
+
+    <bean id="helloController" class="com.hjc.test.HelloController">
+        <property name="helloService" ref="helloService"></property>
+    </bean>
+</beans>
