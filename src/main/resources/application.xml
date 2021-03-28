@@ -4,7 +4,7 @@
         <property name="msg" value="Hello, world!"></property>
     </bean>
 
-    <bean id="helloController" class="com.hjc.test.HelloController">
+    <bean class="com.hjc.test.HelloController">
         <property name="helloService" ref="helloService"></property>
     </bean>
 </beans>
