@@ -10,8 +10,8 @@ public class Main {
 
     public static void testXml() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
-        HelloController helloController = (HelloController) context.getBean("helloController");
-        helloController.say();
+        WrappedService wrappedService = (WrappedService) context.getBean("wrappedService");
+        wrappedService.say();
         HelloService helloService1 = (HelloService) context.getBean("helloService");
         HelloService helloService2 = (HelloService) context.getBean("helloService");
         System.out.println(helloService1 == helloService2);
@@ -19,14 +19,15 @@ public class Main {
 
     public static void testAnnotation() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-annotation.xml");
-        HelloController helloController = (HelloController) context.getBean("helloController");
-        helloController.say();
+        WrappedService wrappedService = (WrappedService) context.getBean("wrappedService");
+        wrappedService.say();
         HelloService helloService1 = (HelloService) context.getBean("helloService");
         HelloService helloService2 = (HelloService) context.getBean("helloService");
         System.out.println(helloService1 == helloService2);
     }
 
     public static void main(String[] args) throws Exception {
-        testXml();
+//        testXml();
+        testAnnotation();
     }
 }

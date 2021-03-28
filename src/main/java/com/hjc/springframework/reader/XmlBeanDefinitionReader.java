@@ -100,9 +100,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         if (name == null || name.length() == 0) {
             // throw new IllegalArgumentException("bean的id不能为空");
             // 如果id为空，id默认为class名字，首字母小写
-            int index = className.lastIndexOf('.');
-            String tmpClassName = className.substring(index + 1);
-            name = Character.toLowerCase(tmpClassName.charAt(0)) + tmpClassName.substring(1);
+//            int index = className.lastIndexOf('.');
+//            String tmpClassName = className.substring(index + 1);
+//            name = Character.toLowerCase(tmpClassName.charAt(0)) + tmpClassName.substring(1);
+
+            // 如果id为空，id默认为className，全限定类名
+            name = className;
         }
         boolean singleton = true;
         // 如果有scope属性，且scope属性是prototype
@@ -150,21 +153,26 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
      * @param clazz
      */
     protected void processAnnotationBeanDefinition(Class<?> clazz) {
-        if (clazz.isAnnotationPresent(Component.class) || clazz.isAnnotationPresent(Controller.class) || clazz.isAnnotationPresent(Service.class) || clazz.isAnnotationPresent(Repository.class)) {
+        if (clazz.isAnnotationPresent(Component.class) || clazz.isAnnotationPresent(Service.class) || clazz.isAnnotationPresent(Repository.class)) {
             String name = null;
             if (clazz.isAnnotationPresent(Component.class)) {
                 name = clazz.getAnnotation(Component.class).name();
-            } else if (clazz.isAnnotationPresent(Controller.class)) {
-                name = clazz.getAnnotation(Controller.class).name();
             } else if (clazz.isAnnotationPresent(Service.class)) {
                 name = clazz.getAnnotation(Service.class).name();
             } else if (clazz.isAnnotationPresent(Repository.class)) {
                 name = clazz.getAnnotation(Repository.class).name();
             }
 
-            // 如果注解内没有标注name属性，默认name是类名，且首字母小写
+            // 注解内没有name属性，默认是首字母小写的类名？
             if (name == null || name.length() == 0) {
-                name = Character.toLowerCase(clazz.getName().charAt(0)) + clazz.getName().substring(1);
+                // name默认是首字母小写的类名
+                String className = clazz.getName();
+                int index = className.lastIndexOf(".");
+                String tmpClassName = className.substring(index + 1);
+                name = Character.toLowerCase(tmpClassName.charAt(0)) + tmpClassName.substring(1);
+
+                // 如果注解内没有标注name属性，默认的名字name就是全限定类名
+//                name = clazz.getName();
             }
             String className = clazz.getName();
             boolean singleton = true;
@@ -207,7 +215,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                     BeanReference beanReference = new BeanReference(refBeanName);
                     beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
                 } else {
-                    // 如果没有标注@Qualified注解，被引用类的名字就是类名本身
+                    // 如果没有标注@Qualified注解，使用被引用的类型去寻找要注入的bean
+                    // getType() 获取属性类型
                     String refBeanName = field.getType().getName();
                     BeanReference beanReference = new BeanReference(refBeanName);
                     beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));

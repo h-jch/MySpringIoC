@@ -33,8 +33,10 @@ public abstract class AbstractBeanFactory implements BeanFactory {
                 beanDefinition = entry.getValue();
             }
         }
+        // 没有找到
         if (beanDefinition == null) {
-            return null;
+//            return null;
+            throw new RuntimeException("没有指定的bean");
         }
         // 组件是多例模式 或者 还未创建
         if (!beanDefinition.isSingleton() || beanDefinition.getBean() == null) {
@@ -54,8 +56,10 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     @Override
     public Object getBean(String beanName) throws Exception {
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
+        // 没有找到
         if (beanDefinition == null) {
-            return null;
+//            return null;
+            throw new RuntimeException("没有指定的bean");
         }
         // 组件是多例模式 或者 还没创建
         if (!beanDefinition.isSingleton() || beanDefinition.getBean() == null) {

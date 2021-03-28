@@ -7,7 +7,7 @@ import com.hjc.springframework.annotation.Value;
 /**
  * @author kei
  */
-@Service()
+@Service(name = "helloService")
 @Scope("prototype")
 public class HelloServiceImpl implements HelloService {
 

@@ -1,13 +1,13 @@
 package com.hjc.test;
 
 import com.hjc.springframework.annotation.Autowired;
-import com.hjc.springframework.annotation.Controller;
+import com.hjc.springframework.annotation.Component;
 
 /**
  * @author kei
  */
-@Controller(name = "helloController")
-public class HelloController {
+@Component()
+public class WrappedService {
 
     @Autowired
     private HelloService helloService;
