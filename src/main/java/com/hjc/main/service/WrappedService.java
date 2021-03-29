@@ -1,4 +1,4 @@
-package com.hjc.test;
+package com.hjc.main.service;
 
 import com.hjc.springframework.annotation.Autowired;
 import com.hjc.springframework.annotation.Component;
@@ -6,7 +6,7 @@ import com.hjc.springframework.annotation.Component;
 /**
  * @author kei
  */
-@Component()
+@Component(name = "wrappedService")
 public class WrappedService {
 
     @Autowired

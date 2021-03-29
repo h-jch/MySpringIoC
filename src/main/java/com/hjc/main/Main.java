@@ -1,7 +1,9 @@
-package com.hjc.test;
+package com.hjc.main;
 
 import com.hjc.springframework.context.ApplicationContext;
 import com.hjc.springframework.context.ClassPathXmlApplicationContext;
+import com.hjc.main.service.HelloService;
+import com.hjc.main.service.WrappedService;
 
 /**
  * @author kei

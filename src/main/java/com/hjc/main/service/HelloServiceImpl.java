@@ -1,4 +1,4 @@
-package com.hjc.test;
+package com.hjc.main.service;
 
 import com.hjc.springframework.annotation.Scope;
 import com.hjc.springframework.annotation.Service;
@@ -17,5 +17,10 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public void say() {
         System.out.println(msg);
+    }
+
+    @Override
+    public String getMsg() {
+        return msg;
     }
 }

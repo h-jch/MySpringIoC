@@ -192,7 +192,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
      * @param clazz
      * @param beanDefinition
      */
-    protected void processAnnotationProperty(Class<?> clazz, BeanDefinition beanDefinition) {
+    public static void processAnnotationProperty(Class<?> clazz, BeanDefinition beanDefinition) {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             String name = field.getName();

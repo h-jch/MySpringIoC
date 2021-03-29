@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <component-scan base-package="com.hjc"></component-scan>
+    <component-scan base-package="com.hjc.main"></component-scan>
 </beans>

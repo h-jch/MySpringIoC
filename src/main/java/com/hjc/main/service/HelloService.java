@@ -1,4 +1,4 @@
-package com.hjc.test;
+package com.hjc.main.service;
 
 /**
  * @author kei
@@ -6,4 +6,6 @@ package com.hjc.test;
 public interface HelloService {
 
     void say();
+
+    String getMsg();
 }
