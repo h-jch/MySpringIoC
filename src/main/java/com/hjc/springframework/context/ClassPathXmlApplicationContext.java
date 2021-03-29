@@ -60,4 +60,17 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
         }
         return beanFactory;
     }
+
+    public void addNewBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception {
+        XmlBeanDefinitionReader.processAnnotationProperty(beanDefinition.getBeanClass(), beanDefinition);
+        beanFactory.registerBeanDefinition(name, beanDefinition);
+    }
+
+    /**
+     * 对于BeanDefinitionMap中新添加的BeanDefinition生成实例
+     * @throws Exception
+     */
+    public void refreshBeanFactory() throws Exception {
+        prepareBeanFactory((AbstractBeanFactory) beanFactory);
+    }
 }
